@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Extractor App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="#" class="active">Home</a>
+        <a href="about">About</a>
+    </nav>
+    <header>
+        <h1>Name Extractor App</h1>
+    </header>
+    <div class="container">
+        <form id="excel-upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="float-container">
+                <div class="float-child">
+                    <input type="file" id="file-input" name="file" accept=".xlsx, .xls" onchange="updateFileName()">
+                    <label for="file-input" class="custom-file-input">Choose Excel File to Upload</label>
+                    <p>Selected File: <span id="selected-file-name">No file chosen</span></p>
+                    <button type="submit" id="file-submit-button">Upload and Process</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <h1 style="text-align: center;">
+            Things to note
+        </h1>
+        <p style="text-align: center;">
+            Always ensure you have the correct column headers!
+            If you wish to download a template, do click the button below!
+        </p>
+        <button type="button" id="template-button" style="align-self: center;" onclick=downloadTemplate()>
+            Download the template!
+        </button>
+    </div>
+    <div class="container">
+        <img src="static\img\Predicted.JPG" style="align-items: center; align-self: center;" height="50%" width="100%">
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const extractButton = document.getElementById('extract-button');
+            const fileInput = document.getElementById('file-input');
+            const outputDiv = document.getElementById('output');
+        });
+        function downloadTemplate() {
+        window.location.href = '/downloadtemplate';
+    }
+    function updateFileName() {
+        // file name update
+        const fileInput = document.getElementById('file-input');
+        const selectedFileName = document.getElementById('selected-file-name');
+        console.log(selectedFileName)
+        if (fileInput.files.length > 0) {
+            selectedFileName.textContent = fileInput.files[0].name;
+        } else {
+            selectedFileName.textContent = 'No file chosen';
+        }
+    }
+    </script>
+</body>
+</html>
